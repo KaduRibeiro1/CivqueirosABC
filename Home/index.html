@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Civiqueiros ABC | Home Page</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="images/logo.jpg" type="image/jpg">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>
+                Civiqueiros ABC
+            </h1>
+            <nav>
+                <ul>
+                    <li><a href="#sobre">Sobre</a></li>
+                    <li><a href="#galeria">Galeria</a></li>
+                    <li><a href="#integrantes">Integrantes</a></li>
+                    <a href="login.html"><button>Entrar</button></a>
+                    
+                    <button href="">Cadastre-se</button>
+                </ul>
+            </nav>
+        </header>
+
+        <section class="sobre" id="sobre">
+            <h2>Sobre o Civiqueiros ABC</h2>
+            <p>O grupo de entusiastas de Civic's foi criado em 2022 por Anderson Santos e Pedro Armelin, ambos donos de Civic's Geração 6.
+            </p>
+            <img src="images/logo.jpg" alt="logo">
+        </section>
+
+        <section id="galeria">
+            <h2>Galeria</h2>
+            <div class="carousel">
+                <img id="carImage" src="images/civic_armelin1.jpg">
+                <div class="buttons">
+                    <button onclick="prevImage()"><</button>
+                    <button onclick="nextImage()">></button>
+                </div>
+            </div>
+        </section>
+
+        <section id="integrantes">
+            <h2>Integrantes</h2>
+            <div class="model">
+                <h3>Hatake Civic</h3>
+                <p>Instagram: @hatake.civic</p>
+                <p>Honda Civic LX 1.6 1998 Prata <br> 
+                    Motor: D16Y7</p>
+                <img src="images/civic_armelin1.jpg"> <img src="images/civic_armelin2.jpg">
+                
+            </div>
+            <div class="model">
+                <h3>Okami EJ6</h3>
+                <p>Instagram: @okami.ej6</p>
+                <p>Honda Civic LX 1.6 1999 Branco <br> 
+                    Motor: D16Y7</p>
+                <img src="images/civic_thales1.jpg"> <img src="images/civic_thales4.jpg"> <img src="images/civic_thales2.jpg">  <img src="images/civic_thales3.jpg">  
+                
+            </div>
+            <div class="model">
+                <h3>O Civic Rosa</h3>
+                <p>Instagram: @civic99_pink</p>
+                <p>Honda Civic LX 1.6 2000 Pink <br> 
+                    Motor: D16Y7</p>
+                <img src="images/civic_mirella1.jpg">
+            
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2024 Civiqueiros ABC. Todos os direitos reservados.</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
