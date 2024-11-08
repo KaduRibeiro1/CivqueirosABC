@@ -84,7 +84,7 @@ h2 {
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    background-image: url(images/sol_preto.jpg);
+    background-image: url(../images/sol_preto.jpg);
     filter: blur(5px);
     z-index: -1;
     opacity: 0.8; /* Aumente a transparência para dar um toque sutil */

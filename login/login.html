@@ -4,45 +4,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Civiqueiros ABC | Home Page</title>
+    <title>Civiqueiros ABC | Login</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="icon" href="images/logo.jpg" type="image/jpg">
+    <link rel="icon" href="../images/logo.jpg" type="image/jpg">
 </head>
 
 <body>
-    <div class="container">
-        <header>
+
+    <header>
+        
+        <nav>
             <h1>
                 Civiqueiros ABC
             </h1>
-            <nav>
-                <ul>
-                    <li><a href="#sobre">Sobre</a></li>
-                    <li><a href="#galeria">Galeria</a></li>
-                    <li><a href="#integrantes">Integrantes</a></li>
-                    <a href="login.html"><button>Entrar</button></a>
+            <ul>
+                
+                
+                <a href="../login/login.html"><button>Entrar</button></a>
 
-                    <button href="">Cadastre-se</button>
-                </ul>
-            </nav>
-        </header>
-
+                <button href="../cadastro/cadastro.html">Cadastre-se</button>
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
         <center>
             <div>
-                <h2>Sobre o Civiqueiros ABC</h2>
-                <p>O grupo de entusiastas de Civic's foi criado em 2022 por Anderson Santos e Pedro Armelin, ambos donos
-                    de Civic's Geração 6.
-                </p>
-                <img src="images/logo.jpg" alt="logo">
+                <h2>Login</h2>
+                <div class="input-group">
+                    <div>
+                        <label class="label">Usuário</label>
+                        <input autocomplete="off" placeholder="Ex: Civiqueiro123" class="input" type="text" id="input_usuarioLogin">
+                    </div>
+                    <br>
+                    <div>
+                        <label class="label">Senha</label>
+                        <input autocomplete="off" placeholder="********" class="input" type="text" id="input_senhaLogin">
+                    </div>
             </div>
+            <a href="">Ainda não tem uma conta? Registre-se</a>
         </center>
-
-            <footer>
-                <p>&copy; 2024 Civiqueiros ABC. Todos os direitos reservados.</p>
-            </footer>
     </div>
-    
-
     <script src="script.js"></script>
 </body>
 
