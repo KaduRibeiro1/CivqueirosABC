@@ -21,12 +21,13 @@ header {
 nav {
     background-color: #ff0000;
     font-family: 'mistral';
+    padding: 10px;
     color: white;
     display: flex;
     justify-content: space-between;
     align-items: center;
     text-align: center;
-    width: 100%;
+    width: 95.4%;
     height: 90px;
     font-size: 15px;
     position: fixed;
@@ -34,7 +35,7 @@ nav {
 
 header button {
     border-radius: 5px;
-    width: 100px;
+    width: 120px;
     border: 1px #ffffff;
     background-color: #ffffff;
     color: #ff0000;
@@ -47,6 +48,7 @@ header button {
     background-color: rgba(0, 0, 0, 0.567);
     /* Fundo quase transparente */
     padding: 20px;
+    padding-bottom: 20px;
     box-shadow: 0 0 20px rgba(23, 23, 23, 0.5);
     /* Sombra vermelha */
     position: relative;
@@ -117,6 +119,13 @@ button {
     width: 120px;
     height: 50px;
   }
+
+  .imagemBotao {
+    border-radius: 100%;
+    width: 30px;
+    height: 30px;
+    margin-left: 80px;
+  }
   
   button:hover {
     letter-spacing: 3px;
@@ -151,6 +160,8 @@ section div img {
     height: 500px;
     width: auto;
     margin: 20px;
+    border-radius: 10px;
+
 }
 
 section {
