@@ -6,7 +6,9 @@
 comandos para mysql server
 */
 
+drop database civiqueirosABC;
 CREATE DATABASE civiqueirosABC;
+
 
 USE civiqueirosABC;
 
@@ -29,3 +31,5 @@ CREATE TABLE carro (
 
 insert into usuario (nome, email, senha, tipoUsuario) values
 ('Carlos Eduardo', 'playspanorama2@gmail.com', 'Dudu1212', 'Desenvolvedor');
+
+SELECT * from usuario;

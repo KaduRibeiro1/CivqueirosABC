@@ -28,6 +28,11 @@
         </nav>
     </header>
     <div class="container">
+      <div class="alerta_erro">
+        <div class="card_erro" id="cardErro">
+          <span id="mensagem_erro"></span>
+        </div>
+      </div>
         <center>
             <div>
                 <h2>Cadastro</h2>
@@ -39,7 +44,7 @@
                     <div>
                         <label class="label">Nome de Usuário</label>
                         <input autocomplete="off" maxlength="14" placeholder="civiqueiro_123" class="input" type="text"
-                            id="input_nomeUsuario" onkeyup="MaskCNPJ()">
+                            id="input_nomeUsuario">
                     </div>
                 </div>
     
@@ -62,7 +67,7 @@
                 <div class="input-group">
                     <div>
                         <label class="label">Email</label>
-                        <input autocomplete="off" placeholder="user@email.com" class="input" type="text" id="input_emailUsuário">
+                        <input autocomplete="off" placeholder="user@email.com" class="input" type="text" id="input_emailUsuario">
                     </div>
                     <div>
                         <label class="label">Senha</label>
@@ -102,16 +107,13 @@ function cadastrar() {
     var emailVar = input_emailUsuario.value;
     var senhaVar = input_senhaUsuario.value;
     var confirmacaoSenhaVar = input_confirmarSenha.value;
-    var codigoVar = input_codigoAutenticacao.value;
-    var idCarro
 
     // Verificando se há algum campo em branco
     if (
       nomeVar == "" ||
       emailVar == "" ||
       senhaVar == "" ||
-      confirmacaoSenhaVar == "" ||
-      codigoVar == ""
+      confirmacaoSenhaVar == ""
     ) {
       cardErro.style.display = "block";
       mensagem_erro.innerHTML =
@@ -124,7 +126,7 @@ function cadastrar() {
     }
 
     // Verificando se o código de ativação é de alguma empresa cadastrada
-    for (let i = 0; i < listaEmpresasCadastradas.length; i++) {
+    /*for (let i = 0; i < listaEmpresasCadastradas.length; i++) {
       if (listaEmpresasCadastradas[i].codigo_ativacao == codigoVar) {
         idEmpresaVincular = listaEmpresasCadastradas[i].id
         console.log("Código de ativação válido.");
@@ -134,7 +136,7 @@ function cadastrar() {
         mensagem_erro.innerHTML = "(Mensagem de erro para código inválido)";
         finalizarAguardar();
       }
-    }
+    }*/
 
     // Enviando o valor da nova input
     fetch("/usuarios/cadastrar", {
@@ -148,14 +150,13 @@ function cadastrar() {
         nomeServer: nomeVar,
         emailServer: emailVar,
         senhaServer: senhaVar,
-        idCarroServer: idCarro
       }),
     })
       .then(function (resposta) {
         console.log("resposta: ", resposta);
 
         if (resposta.ok) {
-          cardErro.style.display = "block";
+         // cardErro.style.display = "block";
 
           mensagem_erro.innerHTML =
             "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
@@ -198,7 +199,42 @@ function cadastrar() {
       });
   }
 
-  function sumirMensagem() {
+ function sumirMensagem() {
     cardErro.style.display = "none";
   }
+
+  function validarSessao() {
+    var email = sessionStorage.EMAIL_USUARIO;
+    var nome = sessionStorage.NOME_USUARIO;
+
+    var b_usuario = document.getElementById("b_usuario");
+
+    if (email != null && nome != null) {
+        b_usuario.innerHTML = nome;
+    } else {
+        window.location = "../login.html";
+    }
+}
+
+function limparSessao() {
+    sessionStorage.clear();
+    window.location = "../login.html";
+}
+
+// carregamento (loading)
+function aguardar() {
+    var divAguardar = document.getElementById("div_aguardar");
+    //divAguardar.style.display = "flex";
+}
+
+function finalizarAguardar(texto) {
+    var divAguardar = document.getElementById("div_aguardar");
+    //divAguardar.style.display = "none";
+
+    var divErrosLogin = document.getElementById("div_erros_login");
+    if (texto) {
+        //divErrosLogin.style.display = "flex";
+        divErrosLogin.innerHTML = texto;
+    }
+}
 </script>

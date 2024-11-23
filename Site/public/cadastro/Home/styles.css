@@ -21,17 +21,21 @@ header {
 nav {
     background-color: #ff0000;
     font-family: 'mistral';
-    padding: 10px;
+    padding: 10px 0; /* Removido espaço lateral */
     color: white;
     display: flex;
     justify-content: space-between;
     align-items: center;
     text-align: center;
-    width: 95.4%;
+    width: 100%; /* Agora ocupa 100% */
     height: 90px;
     font-size: 15px;
-    position: fixed;
+    position: fixed; /* Fixa no topo */
+    top: 0; /* Alinha ao topo */
+    left: 0; /* Alinha à esquerda */
+    z-index: 1000; /* Garante que está acima de outros elementos */
 }
+
 
 header button {
     border-radius: 5px;
@@ -46,15 +50,12 @@ header button {
 .container {
     width: 100%;
     background-color: rgba(0, 0, 0, 0);
-    /* Fundo quase transparente */
     padding: 20px;
     padding-bottom: 20px;
     box-shadow: 0 0 20px rgba(23, 23, 23, 0);
-    /* Sombra vermelha */
     position: relative;
     z-index: 1;
     border: 1px solid #000000;
-    /* Borda vermelha para destaque */
 }
 
 header h1 {
@@ -103,7 +104,7 @@ h2 {
     filter: blur(5px);
     z-index: -1;
     opacity: 0.8;
-    /* Aumente a transparência para dar um toque sutil */
+    border-radius: 8px;
 }
 
 button {
@@ -177,8 +178,103 @@ p {
 
 section img {
     height: 200px;
+    border-radius: 8px;
 }
 
 .sobre {
+    text-align: justify;
+}
+
+.sobre img{
     text-align: center;
 }
+
+/* Barra de rolagem geral */
+::-webkit-scrollbar {
+    width: 8px; /* Largura da barra */
+    height: 8px; /* Altura para rolagem horizontal */
+}
+
+/* Fundo da barra de rolagem */
+::-webkit-scrollbar-track {
+    background: #1c1c1c; /* Cor do fundo */
+    border-radius: 10px; /* Arredondamento */
+}
+
+/* Botão de rolagem */
+::-webkit-scrollbar-thumb {
+    background: #ff0000; /* Cor do botão */
+    border-radius: 10px; /* Arredondamento */
+    border: 2px solid #1c1c1c; /* Espaço ao redor do botão */
+}
+
+/* Botão de rolagem ao passar o mouse */
+::-webkit-scrollbar-thumb:hover {
+    background: #cc0000; /* Cor ao passar o mouse */
+}
+
+.input-group {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    font-family: 'mistral';
+  }
+  
+  .input-group div {
+    display: flex;
+    flex-direction: column;
+    text-align: justify;
+  }
+  
+  .input {
+    width: 350px;
+    height: 50px;
+    background-color: #0000008a;
+    border-radius: .5rem;
+    border: 2px solid white;
+    color: #ffffff;
+    margin-left: 3px;
+    transition: border-color .3s cubic-bezier(.25, .01, .25, 1), color .3s cubic-bezier(.25, .01, .25, 1), background .2s cubic-bezier(.25, .01, .25, 1);
+  }
+  
+  .input::placeholder {
+    color: rgba(255, 255, 255, 0.799);
+    /* Placeholder branco com 50% de opacidade */
+  }
+  
+  .input:hover,
+  .input:focus {
+    outline: none;
+    border-color: #791212;
+  }
+  
+  .input:hover+.label,
+  .input:focus+.label {
+    color: #000000;
+  }
+  
+  .input-group:hover .input:hover {
+    border-color: #791212;
+  }
+  
+  .input option {
+    background-color: #ffffff;
+    color: #ff0000;
+  }
+  
+  .input option:disabled {
+    background-color: #cc0000;
+    color: #ffffff;
+    opacity: 0.5;
+  }
+  
+  .input option[value="selecione"] {
+    color: #ffffff;
+  }
+  
+  .input:disabled,
+  .input option:disabled[selected] {
+    color: rgba(255, 255, 255, 0.799);
+    /* Placeholder branco com 50% de opacidade */
+  }
