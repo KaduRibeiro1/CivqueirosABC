@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Civiqueiros ABC | Cadastro</title>
+    <link rel="stylesheet" href="cadastro/styles.css">
+    <link rel="icon" href="../images/logo.jpg" type="image/jpg">
+</head>
+
+<body>
+
+    <header>
+        <nav>
+            <a href="index.html">
+                <h1>
+                    Civiqueiros ABC
+                </h1>
+                </a>
+            <ul>
+                
+                
+                <a href="login.html"><button>Entrar</button></a>
+
+                <button href="../cadastro/cadastro.html">Cadastre-se</button>
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+        <center>
+            <div>
+                <h2>Cadastro</h2>
+                <div class="input-group">
+                    <div>
+                        <label class="label">Nome de Usuário</label>
+                        <input autocomplete="off" placeholder="Nome Completo" class="input" type="text" id="input_nomeCompleto">
+                    </div>
+                    <div>
+                        <label class="label">Nome de Usuário</label>
+                        <input autocomplete="off" maxlength="14" placeholder="civiqueiro_123" class="input" type="text"
+                            id="input_nomeUsuario" onkeyup="MaskCNPJ()">
+                    </div>
+                </div>
+    
+                <div class="input-group">
+                    <div>
+                        <label class="label">Data de Nascimento</label>
+                        <input autocomplete="off" placeholder="01/01/2000" class="input" type="date" id="input_dtNasc">
+                    </div>
+                    <div>
+                        <label class="label">Gênero</label>
+                        <select class="input" id="select_genero">
+                            <option value="selecione" selected disabled>Selecione</option>
+                            <option value="masculino">Masculino</option>
+                            <option value="feminino">Feminino</option>
+                            <option value="nao_binario">Não Binário</option>
+                        </select>
+                    </div>
+    
+                </div>
+                <div class="input-group">
+                    <div>
+                        <label class="label">Email</label>
+                        <input autocomplete="off" placeholder="user@email.com" class="input" type="text" id="input_emailUsuário">
+                    </div>
+                    <div>
+                        <label class="label">Senha</label>
+                        <input autocomplete="off" placeholder="********" class="input" type="password" id="input_senhaUsuario">
+                    </div>
+                    
+                </div>
+    
+                <div class="input-group">
+                    <div>
+                        <label class="label">Código de Autenticação</label>
+                        <input autocomplete="off" placeholder="Ex: A1B2C3" class="input" type="password" id="input_codigoAutenticacao">
+                    </div>
+                    <div>
+                        <label class="label">Confirmar senha</label>
+                        <input autocomplete="off" placeholder="********" class="input" type="password" id="input_confirmarSenha">
+                    </div>
+                </div>
+    <br>
+                <div>
+                    <button type="button" onclick="cadastrar()">Cadastrar</button>
+                </div>
+            </div>
+            <a href="">Já tem uma conta? Entre</a>
+        </center>
+    </div>
+</body>
+
+</html>
+<script>
+function cadastrar() {
+    // aguardar();
+
+    //Recupere o valor da nova input pelo nome do id
+    // Agora vá para o método fetch logo abaixo
+    var nomeVar = input_nomeUsuario.value;
+    var emailVar = input_emailUsuario.value;
+    var senhaVar = input_senhaUsuario.value;
+    var confirmacaoSenhaVar = input_confirmarSenha.value;
+    var codigoVar = input_codigoAutenticacao.value;
+    var idCarro
+
+    // Verificando se há algum campo em branco
+    if (
+      nomeVar == "" ||
+      emailVar == "" ||
+      senhaVar == "" ||
+      confirmacaoSenhaVar == "" ||
+      codigoVar == ""
+    ) {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+        "(Mensagem de erro para todos os campos em branco)";
+
+      finalizarAguardar();
+      return false;
+    } else {
+      setInterval(sumirMensagem, 5000);
+    }
+
+    // Verificando se o código de ativação é de alguma empresa cadastrada
+    for (let i = 0; i < listaEmpresasCadastradas.length; i++) {
+      if (listaEmpresasCadastradas[i].codigo_ativacao == codigoVar) {
+        idEmpresaVincular = listaEmpresasCadastradas[i].id
+        console.log("Código de ativação válido.");
+        break;
+      } else {
+        cardErro.style.display = "block";
+        mensagem_erro.innerHTML = "(Mensagem de erro para código inválido)";
+        finalizarAguardar();
+      }
+    }
+
+    // Enviando o valor da nova input
+    fetch("/usuarios/cadastrar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        // crie um atributo que recebe o valor recuperado aqui
+        // Agora vá para o arquivo routes/usuario.js
+        nomeServer: nomeVar,
+        emailServer: emailVar,
+        senhaServer: senhaVar,
+        idCarroServer: idCarro
+      }),
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+          cardErro.style.display = "block";
+
+          mensagem_erro.innerHTML =
+            "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+
+          setTimeout(() => {
+            window.location = "login.html";
+          }, "2000");
+
+          limparFormulario();
+          finalizarAguardar();
+        } else {
+          throw "Houve um erro ao tentar realizar o cadastro!";
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+        finalizarAguardar();
+      });
+
+    return false;
+  }
+
+  // Listando empresas cadastradas 
+  function listar() {
+    fetch("/empresas/listar", {
+      method: "GET",
+    })
+      .then(function (resposta) {
+        resposta.json().then((empresas) => {
+          empresas.forEach((empresa) => {
+            listaEmpresasCadastradas.push(empresa);
+
+            console.log("listaEmpresasCadastradas")
+            console.log(listaEmpresasCadastradas[0].codigo_ativacao)
+          });
+        });
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+  }
+
+  function sumirMensagem() {
+    cardErro.style.display = "none";
+  }
+</script>

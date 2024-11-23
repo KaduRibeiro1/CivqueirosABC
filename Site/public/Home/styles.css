@@ -45,11 +45,11 @@ header button {
 
 .container {
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.567);
+    background-color: rgba(0, 0, 0, 0);
     /* Fundo quase transparente */
     padding: 20px;
     padding-bottom: 20px;
-    box-shadow: 0 0 20px rgba(23, 23, 23, 0.5);
+    box-shadow: 0 0 20px rgba(23, 23, 23, 0);
     /* Sombra vermelha */
     position: relative;
     z-index: 1;
@@ -165,7 +165,7 @@ section div img {
 }
 
 section {
-    background-color: #1c1c1ccc;
+    background-color: #161616be;
     border-radius: 5px;
 }
 

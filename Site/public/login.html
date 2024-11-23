@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Civiqueiros ABC | Login</title>
+    <link rel="stylesheet" href="login/styles.css">
+    <link rel="icon" href="images/logo.jpg" type="image/jpg">
+</head>
+
+<body>
+
+    <header>
+        
+        <nav>
+            <a href="index.html">
+                <h1>
+                    Civiqueiros ABC
+                </h1>
+                </a>
+            <ul>
+                
+                
+                <a href="login.html"><button>Entrar</button></a>
+
+                <a href="cadastro.html"><button>Cadastre-se</button></a>
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+        <center>
+            <div>
+                <h2>Login</h2>
+                <div class="input-group">
+                    <div>
+                        <label class="label">E-mail</label>
+                        <input autocomplete="off" placeholder="Ex: Civiqueiro123" class="input" type="text" id="input_emailLogin">
+                    </div>
+                    <br>
+                    <div>
+                        <label class="label">Senha</label>
+                        <input autocomplete="off" placeholder="********" class="input" type="text" id="input_senhaLogin">
+                    </div>
+            </div>
+<br>
+            <div>
+                <button type="button" onclick="entrar()">Entrar</button>
+            </div>
+            <a href="">Ainda não tem uma conta? Registre-se</a>
+        </center>
+    </div>
+</body>
+
+</html>
+
+<script>
+
+
+    function entrar() {
+        aguardar();
+
+        var emailVar = input_emailLogin.value;
+        var senhaVar = input_senhaLogin.value;
+
+        if (emailVar == "" || senhaVar == "") {
+            cardErro.style.display = "block"
+            mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
+            finalizarAguardar();
+            return false;
+        }
+        else {
+            setInterval(sumirMensagem, 5000)
+        }
+
+        console.log("FORM LOGIN: ", emailVar);
+        console.log("FORM SENHA: ", senhaVar);
+
+        fetch("/usuarios/autenticar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                emailServer: emailVar,
+                senhaServer: senhaVar
+            })
+        }).then(function (resposta) {
+            console.log("ESTOU NO THEN DO entrar()!")
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+                    sessionStorage.EMAIL_USUARIO = json.email;
+                    sessionStorage.NOME_USUARIO = json.nome;
+                    sessionStorage.ID_USUARIO = json.id;
+                    sessionStorage.AQUARIOS = JSON.stringify(json.aquarios)
+
+                    setTimeout(function () {
+                        window.location = "index.html";
+                    }, 1000); // apenas para exibir o loading
+
+                });
+
+            } else {
+
+                console.log("Houve um erro ao tentar realizar o login!");
+
+                resposta.text().then(texto => {
+                    console.error(texto);
+                    finalizarAguardar(texto);
+                });
+            }
+
+        }).catch(function (erro) {
+            console.log(erro);
+        })
+
+        return false;
+    }
+
+    function sumirMensagem() {
+        cardErro.style.display = "none"
+    }
+
+</script>
