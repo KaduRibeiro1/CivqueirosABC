@@ -13,17 +13,14 @@
 
     <header>
         <nav>
-            <a href="index.html">
                 <h1>
                     Civiqueiros ABC
                 </h1>
-                </a>
             <ul>
                 
                 
                 <a href="login.html"><button>Entrar</button></a>
 
-                <button href="../cadastro/cadastro.html">Cadastre-se</button>
             </ul>
         </nav>
     </header>
@@ -79,7 +76,7 @@
                 <div class="input-group">
                     <div>
                         <label class="label">Código de Autenticação</label>
-                        <input autocomplete="off" placeholder="Ex: A1B2C3" class="input" type="password" id="input_codigoAutenticacao">
+                        <input autocomplete="off" placeholder="Ex: A1B2C3" class="input" type="text" id="input_codigoAutenticacao">
                     </div>
                     <div>
                         <label class="label">Confirmar senha</label>
@@ -91,7 +88,7 @@
                     <button type="button" onclick="cadastrar()">Cadastrar</button>
                 </div>
             </div>
-            <a href="">Já tem uma conta? Entre</a>
+            <a href="login.html">Já tem uma conta? Entre</a>
         </center>
     </div>
 </body>
@@ -107,6 +104,7 @@ function cadastrar() {
     var emailVar = input_emailUsuario.value;
     var senhaVar = input_senhaUsuario.value;
     var confirmacaoSenhaVar = input_confirmarSenha.value;
+    var codigoAut = input_codigoAutenticacao.value
 
     // Verificando se há algum campo em branco
     if (
@@ -150,6 +148,7 @@ function cadastrar() {
         nomeServer: nomeVar,
         emailServer: emailVar,
         senhaServer: senhaVar,
+        codigoServer: codigoAut
       }),
     })
       .then(function (resposta) {

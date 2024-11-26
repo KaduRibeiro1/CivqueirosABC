@@ -4,96 +4,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Civiqueiros ABC | Home Page</title>
-    <link rel="stylesheet" href="Home/styles.css">
+    <title>Bem-Vindo ao Civiqueiros ABC</title>
+    <link rel="stylesheet" href="home page/styles.css">
     <link rel="icon" href="images/logo.jpg" type="image/jpg">
 </head>
 
 <body>
+
+    <header>
+
+        <nav>
+                <h1>
+                    Civiqueiros ABC
+                </h1>
+            </a>
+            <ul>
+                <a href="login.html"><button>Entrar</button></a>
+
+                <a href="cadastro.html"><button>Cadastre-se</button></a>
+            </ul>
+        </nav>
+    </header>
     <div class="container">
-        <header>
-            <nav>
-                <a href="../Home/index.html">
-                    <h1>
-                        Civiqueiros ABC
-                    </h1>
-                </a>
-                <ul>
-                    <li><a href="#sobre">Sobre</a></li>
-                    <li><a href="#galeria">Galeria</a></li>
-                    <li><a href="#integrantes">Integrantes</a></li>
-                    <a href="login.html"><button>Entrar</button></a>
-
-                    <a href="cadastro.html"><button>Cadastre-se</button></a>
-                </ul>
-            </nav>
-        </header>
-
-        <section class="sobre" id="sobre">
-            <h2>Sobre o Civiqueiros ABC</h2>
-            <p>
-                O Civiqueiros ABC tem foco em carros do modelo Honda Civic, porém, qualquer carro de origem japonesa é
-                recebido com muito carinho
-                por todos os integrantes do grupo. A equipe foi criada com o intuito de reunir pessoas com o mesmo
-                gosto, que buscam de se reunir
-                em encontros, para expor seus carros e conversar sobre. E diferente de como alguns enxergam, não é grupo
-                de rachas ou arruaça, e
-                sim um grupo de amantes de carros japoneses, que buscam socializar com outros indivíduos, em eventos
-                amigáveis e que não infringem
-                nenhum tipo de lei.
-            </p>
-            
-            <center><img src="images/logo.jpg" alt="logo"></center>
-
-        </section>
-
-        <section id="galeria">
-            <h2>Galeria</h2>
-            <div class="carousel">
-                <img id="carImage" src="images/civic_armelin1.jpg">
-                <div class="buttons">
-                    <button class="imagemBotao" onclick="prevImage()"><</button>
-                    <button class="imagemBotao" onclick="nextImage()">></button>
-                </div>
+        <div class="alerta_erro">
+            <div class="card_erro" id="cardErro">
+                <span id="mensagem_erro"></span>
             </div>
-        </section>
-
-        <section id="integrantes">
-            <h2>Integrantes</h2>
-            <div id="div_integrantes">
-                <div class="model">
-                    <h3>Hatake Civic</h3>
-                    <p>Instagram: @hatake.civic</p>
-                    <p>Honda Civic LX 1.6 1998 Prata <br>
-                        Motor: D16Y7</p>
-                    <img src="images/civic_armelin1.jpg"> <img src="images/civic_armelin2.jpg">
-
-                </div>
-                <div class="model">
-                    <h3>Okami EJ6</h3>
-                    <p>Instagram: @okami.ej6</p>
-                    <p>Honda Civic LX 1.6 1999 Branco <br>
-                        Motor: D16Y7</p>
-                    <img src="images/civic_thales1.jpg"> <img src="images/civic_thales4.jpg"> <img
-                        src="images/civic_thales2.jpg"> <img src="images/civic_thales3.jpg">
-
-                </div>
-                <div class="model">
-                    <h3>O Civic Rosa</h3>
-                    <p>Instagram: @civic99_pink</p>
-                    <p>Honda Civic LX 1.6 2000 Pink <br>
-                        Motor: D16Y7</p>
-                    <img src="images/civic_mirella1.jpg">
-                </div>
+        </div>
+        <center>
+            <div>
+                <button type="button" onclick="entrar()">Entre</button>
             </div>
-        </section>
-
-        <footer>
-            <p>&copy; 2024 Civiqueiros ABC. Todos os direitos reservados.</p>
-        </footer>
+        </center>
     </div>
-
-    <script src="Home/script.js"></script>
 </body>
 
 </html>
+
+<script>
+    function entrar() {
+        window.location = "login.html"
+    }
+</script>

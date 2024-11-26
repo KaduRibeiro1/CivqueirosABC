@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Civiqueiros ABC | Cadastro de Veiculo</title>
+    <link rel="stylesheet" href="cadastro/styles.css">
+    <link rel="icon" href="images/logo.jpg" type="image/jpg">
+</head>
+
+<body>
+
+    <header>
+        <nav>
+                <h1>
+                    Civiqueiros ABC
+                </h1>
+        </nav>
+    </header>
+    <div class="container">
+      <div class="alerta_erro">
+        <div class="card_erro" id="cardErro">
+          <span id="mensagem_erro"></span>
+        </div>
+      </div>
+        <center>
+            <div>
+                <h2>Cadastro de Veiculo</h2>
+                <div class="input-group">
+                    <div>
+                        <label class="label">Modelo do carro:</label>
+                        <input autocomplete="off" placeholder="Ex: Civic LX 1.6" class="input" type="text" id="input_modeloCarro">
+                    </div>
+                    <div>
+                        <label class="label">Geração</label>
+                        <select class="input" id="select_geracao">
+                          <option value="#">Escolha uma opção</option>
+                          <option value="G5">G5</option>
+                          <option value="G6">G6</option>
+                          <option value="G7">G7</option>
+                          <option value="G8">G8</option>
+                          <option value="G9">G9</option>
+                          <option value="G10">G10</option>
+                      </select>
+                    </div>
+                </div>
+    
+                <div class="input-group">
+                    <div>
+                        <label class="label">Cor</label>
+                        <input autocomplete="off" placeholder="Ex: Rosa" class="input" type="text" id="input_cor">
+                    </div>
+                    <div>
+                      <label class="label">Ano de Fabricação</label>
+                      <input autocomplete="off" maxlength="4" placeholder="Ex: 2000" class="input" type="number"
+                          id="input_ano">
+                    </div>
+                </div>
+                <div class="input-group">
+                  <div>
+                      <label class="label">Código de Autenticação</label>
+                      <input autocomplete="off" placeholder="Ex: A1B2C3" class="input" type="text" maxlength="6" minlength="6" id="input_codigoAutenticacao">
+                  </div>
+              </div>
+                
+    <br>
+                <div>
+                    <button type="button" onclick="cadastrarCarro()">Cadastrar</button>
+                </div>
+            </div>
+        </center>
+    </div>
+</body>
+
+</html>
+ 
+<script>
+    function cadastrarCarro() {
+    // aguardar();
+
+    //Recupere o valor da nova input pelo nome do id
+    // Agora vá para o método fetch logo abaixo
+    var modelo = input_modeloCarro.value;
+    var geracao = select_geracao.value
+    var ano = input_ano.value;
+    var cor = input_cor.value;
+    var codigoAut = input_codigoAutenticacao.value;
+
+    // Verificando se há algum campo em branco
+    if (
+        modelo == "" ||
+        ano == "" ||
+        cor == "" ||
+        codigoAut == "" ||
+        geracao == '#'
+    ) {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+        "Preencha todos os campos corretamente para prosseguir!";
+
+      finalizarAguardar();
+      return false;
+    } else {
+      setInterval(sumirMensagem, 5000);
+    }
+
+    // Verificando se o código de ativação é de alguma empresa cadastrada
+    /*for (let i = 0; i < listaEmpresasCadastradas.length; i++) {
+      if (listaEmpresasCadastradas[i].codigo_ativacao == codigoVar) {
+        idEmpresaVincular = listaEmpresasCadastradas[i].id
+        console.log("Código de ativação válido.");
+        break;
+      } else {
+        cardErro.style.display = "block";
+        mensagem_erro.innerHTML = "(Mensagem de erro para código inválido)";
+        finalizarAguardar();
+      }
+    }*/
+
+    // Enviando o valor da nova input
+    fetch("/carro/cadastrar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        // crie um atributo que recebe o valor recuperado aqui
+        // Agora vá para o arquivo routes/usuario.js
+        modeloServer: modelo,
+        geracaoServer: geracao,
+        anoServer: ano,
+        corServer: cor,
+        codigoServer: codigoAut
+      }),
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+         // cardErro.style.display = "block";
+
+          mensagem_erro.innerHTML =
+            "Cadastro realizado com sucesso! Redirecionando para tela Inicial...";
+
+          setTimeout(() => {
+            window.location = "homePage1.html";
+          }, "2000");
+
+          limparFormulario();
+          finalizarAguardar();
+        } else {
+          throw "Houve um erro ao tentar realizar o cadastro!";
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+        finalizarAguardar();
+      });
+
+    return false;
+  }
+
+ function sumirMensagem() {
+    cardErro.style.display = "none";
+  }
+
+  function validarSessao() {
+    var email = sessionStorage.EMAIL_USUARIO;
+    var nome = sessionStorage.NOME_USUARIO;
+
+    var b_usuario = document.getElementById("b_usuario");
+
+    if (email != null && nome != null) {
+        b_usuario.innerHTML = nome;
+    } else {
+        window.location = "../login.html";
+    }
+}
+
+function limparSessao() {
+    sessionStorage.clear();
+    window.location = "../login.html";
+}
+
+// carregamento (loading)
+function aguardar() {
+    var divAguardar = document.getElementById("div_aguardar");
+    //divAguardar.style.display = "flex";
+}
+
+function finalizarAguardar(texto) {
+    var divAguardar = document.getElementById("div_aguardar");
+    //divAguardar.style.display = "none";
+
+    var divErrosLogin = document.getElementById("div_erros_login");
+    if (texto) {
+        //divErrosLogin.style.display = "flex";
+        divErrosLogin.innerHTML = texto;
+    }
+}
+</script>

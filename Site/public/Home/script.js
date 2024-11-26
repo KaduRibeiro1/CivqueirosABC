@@ -26,7 +26,7 @@ function prevImage() {
 }
 
 // Adicionar imagens enviadas pelo usuário
-const form = document.getElementById('uploadForm');
+/*const form = document.getElementById('uploadForm');
 form.addEventListener('submit', (e) => {
     e.preventDefault();
     const fileInput = document.getElementById('carPhoto');
@@ -53,4 +53,4 @@ function adicionarIntegrante() {
                 Motor: <br>
                 <input type="text" id="input_motor"> <br>`
 
-}
+}*/
